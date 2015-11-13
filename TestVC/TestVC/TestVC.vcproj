@@ -21,7 +21,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="2"
-			CharacterSet="1"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -67,7 +67,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="winmm.lib"
 				LinkIncremental="2"
+				IgnoreDefaultLibraryNames="libc.lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -210,6 +212,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\TestDrawPicDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\TestVC.cpp"
 				>
 			</File>
@@ -229,6 +235,10 @@
 			</File>
 			<File
 				RelativePath=".\stdafx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TestDrawPicDlg.h"
 				>
 			</File>
 			<File
