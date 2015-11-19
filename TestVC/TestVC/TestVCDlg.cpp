@@ -5,7 +5,7 @@
 #include "TestVC.h"
 #include "TestVCDlg.h"
 #include "TestDrawPicDlg.h"
-
+#include "FFMpegTestDlg.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -70,6 +70,8 @@ BEGIN_MESSAGE_MAP(CTestVCDlg, CDialog)
 	//ON_NOTIFY(NM_THEMECHANGED, IDC_SCROLLBAR_IMAGE, &CTestVCDlg::OnNMThemeChangedScrollbarImage)
 	ON_WM_HSCROLL()
 	ON_WM_VSCROLL()
+	ON_BN_CLICKED(IDC_BUTTON2, &CTestVCDlg::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON_FFMPEG, &CTestVCDlg::OnBnClickedButtonFfmpeg)
 END_MESSAGE_MAP()
 
 
@@ -164,9 +166,10 @@ void CTestVCDlg::OnPaint()
 	}
 	else
 	{
-		//CDialog::OnPaint();
-		//DrawImage();
 		m_imgManager.DrawImage(this, m_iStartY / 1000.0);
+		CDialog::OnPaint();
+		//DrawImage();
+
 	}
 }
 
@@ -329,4 +332,18 @@ void CTestVCDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 	// TODO: Add your message handler code here and/or call default
 
 	CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
+}
+
+void CTestVCDlg::OnBnClickedButton2()
+{
+	// TODO: Add your control notification handler code here
+	CTestDrawPicDlg dlg;
+	dlg.DoModal();
+}
+
+void CTestVCDlg::OnBnClickedButtonFfmpeg()
+{
+	// TODO: Add your control notification handler code here
+	CFFMpegTestDlg dlg;
+	dlg.DoModal();
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="macroes"
+	>
+	<UserMacro
+		Name="OPENCV_DIR"
+		Value="E:\E\OpenCV\opencv\sources"
+	/>
+</VisualStudioPropertySheet>

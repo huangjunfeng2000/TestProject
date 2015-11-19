@@ -17,9 +17,10 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="$(OPENCV_DIR)\project\bin\Debug\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
+			InheritedPropertySheets=".\macroes.vsprops"
 			UseOfMFC="2"
 			CharacterSet="2"
 			>
@@ -44,7 +45,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
+				AdditionalIncludeDirectories="&quot;$(OPENCV_DIR)\modules\video\include&quot;;&quot;$(OPENCV_DIR)\modules\imgproc\include&quot;;&quot;$(OPENCV_DIR)\modules\core\include&quot;;&quot;$(OPENCV_DIR)\modules\hal\include&quot;;&quot;$(OPENCV_DIR)\modules\calib3d\include&quot;;&quot;$(OPENCV_DIR)\modules\features2d\include&quot;;&quot;$(OPENCV_DIR)\modules\highgui\include&quot;;&quot;$(OPENCV_DIR)\modules\videoio\include&quot;;&quot;$(OPENCV_DIR)\modules\imgcodecs\include&quot;;&quot;$(OPENCV_DIR)\modules\photo\include&quot;;&quot;$(OPENCV_DIR)\modules\ml\include&quot;;&quot;$(OPENCV_DIR)\modules\flann\include&quot;;&quot;$(OPENCV_DIR)\modules\objdetect\include&quot;;&quot;$(OPENCV_DIR)\modules\shape\include&quot;;&quot;$(OPENCV_DIR)\modules\videostab\include&quot;;&quot;$(OPENCV_DIR)\modules\stitching\include&quot;;&quot;$(OPENCV_DIR)\include&quot;;..\..;&quot;$(FFMPEG_DIR)\include&quot;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;__STDC_CONSTANT_MACROS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -67,10 +69,13 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="winmm.lib"
+				AdditionalDependencies="kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib opencv_stitching300d.lib opencv_videostab300d.lib opencv_shape300d.lib opencv_objdetect300d.lib opencv_photo300d.lib opencv_calib3d300d.lib opencv_features2d300d.lib opencv_flann300d.lib opencv_highgui300d.lib opencv_videoio300d.lib opencv_imgcodecs300d.lib opencv_ml300d.lib opencv_video300d.lib opencv_imgproc300d.lib opencv_core300d.lib opencv_hal300d.lib avcodec.lib avdevice.lib avfilter.lib avformat.lib avutil.lib postproc.lib swresample.lib swscale.lib $(NOINHERIT)"
+				OutputFile="$(OPENCV_DIR)\project\bin\Debug\$(ProjectName).exe"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(OPENCV_DIR)\project\lib\Debug&quot;;&quot;$(FFMPEG_DIR)\lib&quot;"
 				IgnoreDefaultLibraryNames="libc.lib"
 				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(OPENCV_DIR)\project\bin\Debug\$(TargetName).pdb"
 				SubSystem="2"
 				TargetMachine="1"
 			/>
@@ -104,6 +109,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
+			InheritedPropertySheets=".\macroes.vsprops"
 			UseOfMFC="2"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -192,6 +198,18 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\CvvImage.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FFmpegImage.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FFMpegTestDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -229,6 +247,18 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\CvvImage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FFmpegImage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FFMpegTestDlg.h"
+				>
+			</File>
 			<File
 				RelativePath=".\Resource.h"
 				>

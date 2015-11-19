@@ -176,5 +176,7 @@ public:
 	void OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);  
 	BOOL CTestVCDlg::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)  ;
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
+	afx_msg void OnBnClickedButton2();
+	afx_msg void OnBnClickedButtonFfmpeg();
 };
 
