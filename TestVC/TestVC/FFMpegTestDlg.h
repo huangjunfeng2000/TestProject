@@ -1,5 +1,5 @@
 #pragma once
-
+#include "FFmpegCamera.h"
 
 // CFFMpegTestDlg dialog
 
@@ -20,4 +20,5 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedButtonSavebmp();
+	CFfmpegCamera m_Camera;
 };

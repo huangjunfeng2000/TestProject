@@ -6,6 +6,8 @@
 #include "TestVCDlg.h"
 #include "TestDrawPicDlg.h"
 #include "FFMpegTestDlg.h"
+#include "CTableDefine.h"
+#include "commonfunc.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -72,6 +74,7 @@ BEGIN_MESSAGE_MAP(CTestVCDlg, CDialog)
 	ON_WM_VSCROLL()
 	ON_BN_CLICKED(IDC_BUTTON2, &CTestVCDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON_FFMPEG, &CTestVCDlg::OnBnClickedButtonFfmpeg)
+	ON_BN_CLICKED(IDC_BUTTON3, &CTestVCDlg::OnBnClickedButton3)
 END_MESSAGE_MAP()
 
 
@@ -346,4 +349,28 @@ void CTestVCDlg::OnBnClickedButtonFfmpeg()
 	// TODO: Add your control notification handler code here
 	CFFMpegTestDlg dlg;
 	dlg.DoModal();
+}
+
+void CTestVCDlg::OnBnClickedButton3()
+{
+	// TODO: Add your control notification handler code here
+	const std::string strDB = "TestScope.db3";
+	bool bRes = OpenProject(strDB);
+	std::vector<SharRecBase> vecValues, vecValues2;
+	SharRecBase sValue;
+	ReadAllInfo(DB_ID_BEXAMINE, vecValues);
+	ReadAllInfoCon(DB_ID_BEXAMINE, vecValues2, "id > 2");
+	ReadInfo(DB_ID_BEXAMINE, 1, sValue);
+	if (sValue.get())
+	{
+		CRecData *pData = (CRecData *)(sValue.get());
+		pData->m_strColumn2 = "strColumn2";
+		WriteInfo(DB_ID_BEXAMINE, pData);
+	}
+	CRecData item;
+	item.m_strColumn1 = GetRandString();
+	int id = AddInfo(DB_ID_BEXAMINE, &item);
+	bRes = Delete(DB_ID_BEXAMINE, id);
+
+
 }

@@ -178,5 +178,6 @@ public:
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButtonFfmpeg();
+	afx_msg void OnBnClickedButton3();
 };
 

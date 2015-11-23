@@ -8,4 +8,8 @@
 		Name="OPENCV_DIR"
 		Value="E:\E\OpenCV\opencv\sources"
 	/>
+	<UserMacro
+		Name="FFMPEG_DIR"
+		Value="E:\source\ffmpetdll\ffmpeg-20151117-git-e9aea6d-win32-dev"
+	/>
 </VisualStudioPropertySheet>

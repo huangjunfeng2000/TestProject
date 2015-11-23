@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(OPENCV_DIR)\modules\video\include&quot;;&quot;$(OPENCV_DIR)\modules\imgproc\include&quot;;&quot;$(OPENCV_DIR)\modules\core\include&quot;;&quot;$(OPENCV_DIR)\modules\hal\include&quot;;&quot;$(OPENCV_DIR)\modules\calib3d\include&quot;;&quot;$(OPENCV_DIR)\modules\features2d\include&quot;;&quot;$(OPENCV_DIR)\modules\highgui\include&quot;;&quot;$(OPENCV_DIR)\modules\videoio\include&quot;;&quot;$(OPENCV_DIR)\modules\imgcodecs\include&quot;;&quot;$(OPENCV_DIR)\modules\photo\include&quot;;&quot;$(OPENCV_DIR)\modules\ml\include&quot;;&quot;$(OPENCV_DIR)\modules\flann\include&quot;;&quot;$(OPENCV_DIR)\modules\objdetect\include&quot;;&quot;$(OPENCV_DIR)\modules\shape\include&quot;;&quot;$(OPENCV_DIR)\modules\videostab\include&quot;;&quot;$(OPENCV_DIR)\modules\stitching\include&quot;;&quot;$(OPENCV_DIR)\include&quot;;..\..;&quot;$(FFMPEG_DIR)\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(OPENCV_DIR)\modules\video\include&quot;;&quot;$(OPENCV_DIR)\modules\imgproc\include&quot;;&quot;$(OPENCV_DIR)\modules\core\include&quot;;&quot;$(OPENCV_DIR)\modules\hal\include&quot;;&quot;$(OPENCV_DIR)\modules\calib3d\include&quot;;&quot;$(OPENCV_DIR)\modules\features2d\include&quot;;&quot;$(OPENCV_DIR)\modules\highgui\include&quot;;&quot;$(OPENCV_DIR)\modules\videoio\include&quot;;&quot;$(OPENCV_DIR)\modules\imgcodecs\include&quot;;&quot;$(OPENCV_DIR)\modules\photo\include&quot;;&quot;$(OPENCV_DIR)\modules\ml\include&quot;;&quot;$(OPENCV_DIR)\modules\flann\include&quot;;&quot;$(OPENCV_DIR)\modules\objdetect\include&quot;;&quot;$(OPENCV_DIR)\modules\shape\include&quot;;&quot;$(OPENCV_DIR)\modules\videostab\include&quot;;&quot;$(OPENCV_DIR)\modules\stitching\include&quot;;&quot;$(OPENCV_DIR)\include&quot;;..\..;&quot;$(FFMPEG_DIR)\include&quot;;.\Common;&quot;$(BOOST_INCLUDEDIR)&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;__STDC_CONSTANT_MACROS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -69,10 +69,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib opencv_stitching300d.lib opencv_videostab300d.lib opencv_shape300d.lib opencv_objdetect300d.lib opencv_photo300d.lib opencv_calib3d300d.lib opencv_features2d300d.lib opencv_flann300d.lib opencv_highgui300d.lib opencv_videoio300d.lib opencv_imgcodecs300d.lib opencv_ml300d.lib opencv_video300d.lib opencv_imgproc300d.lib opencv_core300d.lib opencv_hal300d.lib avcodec.lib avdevice.lib avfilter.lib avformat.lib avutil.lib postproc.lib swresample.lib swscale.lib $(NOINHERIT)"
+				AdditionalDependencies="kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib opencv_stitching300d.lib opencv_videostab300d.lib opencv_shape300d.lib opencv_objdetect300d.lib opencv_photo300d.lib opencv_calib3d300d.lib opencv_features2d300d.lib opencv_flann300d.lib opencv_highgui300d.lib opencv_videoio300d.lib opencv_imgcodecs300d.lib opencv_ml300d.lib opencv_video300d.lib opencv_imgproc300d.lib opencv_core300d.lib opencv_hal300d.lib avcodec.lib avdevice.lib avfilter.lib avformat.lib avutil.lib postproc.lib swresample.lib swscale.lib sqlite3.lib $(NOINHERIT)"
 				OutputFile="$(OPENCV_DIR)\project\bin\Debug\$(ProjectName).exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(OPENCV_DIR)\project\lib\Debug&quot;;&quot;$(FFMPEG_DIR)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(OPENCV_DIR)\project\lib\Debug&quot;;&quot;$(FFMPEG_DIR)\lib&quot;;.\Common"
 				IgnoreDefaultLibraryNames="libc.lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OPENCV_DIR)\project\bin\Debug\$(TargetName).pdb"
@@ -198,15 +198,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\CvvImage.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\FFmpegImage.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\FFMpegTestDlg.cpp"
+				RelativePath=".\commonfunc.cpp"
 				>
 			</File>
 			<File
@@ -230,10 +222,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\TestDrawPicDlg.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\TestVC.cpp"
 				>
 			</File>
@@ -241,6 +229,46 @@
 				RelativePath=".\TestVCDlg.cpp"
 				>
 			</File>
+			<Filter
+				Name="Camera"
+				>
+				<File
+					RelativePath=".\CvvImage.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FFmpegCamera.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FFmpegImage.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FFMpegTestDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\TestDrawPicDlg.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="DB"
+				>
+				<File
+					RelativePath=".\CManageDB.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Common\CppSQLite3.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CTableDefine.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -248,15 +276,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\CvvImage.h"
-				>
-			</File>
-			<File
-				RelativePath=".\FFmpegImage.h"
-				>
-			</File>
-			<File
-				RelativePath=".\FFMpegTestDlg.h"
+				RelativePath=".\commonfunc.h"
 				>
 			</File>
 			<File
@@ -268,10 +288,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\TestDrawPicDlg.h"
-				>
-			</File>
-			<File
 				RelativePath=".\TestVC.h"
 				>
 			</File>
@@ -279,6 +295,54 @@
 				RelativePath=".\TestVCDlg.h"
 				>
 			</File>
+			<Filter
+				Name="Camera"
+				>
+				<File
+					RelativePath=".\CvvImage.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FFmpegCamera.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FFmpegImage.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FFMpegTestDlg.h"
+					>
+				</File>
+				<File
+					RelativePath=".\TestDrawPicDlg.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="DB"
+				>
+				<File
+					RelativePath=".\CManageDB.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Common\CppSQLite3.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CTableDefine.h"
+					>
+				</File>
+				<File
+					RelativePath=".\dbtypes.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Common\sqlite3.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
