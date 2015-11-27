@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(OPENCV_DIR)\modules\video\include&quot;;&quot;$(OPENCV_DIR)\modules\imgproc\include&quot;;&quot;$(OPENCV_DIR)\modules\core\include&quot;;&quot;$(OPENCV_DIR)\modules\hal\include&quot;;&quot;$(OPENCV_DIR)\modules\calib3d\include&quot;;&quot;$(OPENCV_DIR)\modules\features2d\include&quot;;&quot;$(OPENCV_DIR)\modules\highgui\include&quot;;&quot;$(OPENCV_DIR)\modules\videoio\include&quot;;&quot;$(OPENCV_DIR)\modules\imgcodecs\include&quot;;&quot;$(OPENCV_DIR)\modules\photo\include&quot;;&quot;$(OPENCV_DIR)\modules\ml\include&quot;;&quot;$(OPENCV_DIR)\modules\flann\include&quot;;&quot;$(OPENCV_DIR)\modules\objdetect\include&quot;;&quot;$(OPENCV_DIR)\modules\shape\include&quot;;&quot;$(OPENCV_DIR)\modules\videostab\include&quot;;&quot;$(OPENCV_DIR)\modules\stitching\include&quot;;&quot;$(OPENCV_DIR)\include&quot;;..\..;&quot;$(FFMPEG_DIR)\include&quot;;.\Common;&quot;$(BOOST_INCLUDEDIR)&quot;"
+				AdditionalIncludeDirectories="&quot;$(OPENCV_DIR)\modules\video\include&quot;;&quot;$(OPENCV_DIR)\modules\imgproc\include&quot;;&quot;$(OPENCV_DIR)\modules\core\include&quot;;&quot;$(OPENCV_DIR)\modules\hal\include&quot;;&quot;$(OPENCV_DIR)\modules\calib3d\include&quot;;&quot;$(OPENCV_DIR)\modules\features2d\include&quot;;&quot;$(OPENCV_DIR)\modules\highgui\include&quot;;&quot;$(OPENCV_DIR)\modules\videoio\include&quot;;&quot;$(OPENCV_DIR)\modules\imgcodecs\include&quot;;&quot;$(OPENCV_DIR)\modules\photo\include&quot;;&quot;$(OPENCV_DIR)\modules\ml\include&quot;;&quot;$(OPENCV_DIR)\modules\flann\include&quot;;&quot;$(OPENCV_DIR)\modules\objdetect\include&quot;;&quot;$(OPENCV_DIR)\modules\shape\include&quot;;&quot;$(OPENCV_DIR)\modules\videostab\include&quot;;&quot;$(OPENCV_DIR)\modules\stitching\include&quot;;&quot;$(OPENCV_DIR)\include&quot;;..\..;&quot;$(FFMPEG_DIR)\include&quot;;.\Common;&quot;$(BOOST_INCLUDEDIR)&quot;;.\DirectShow\Include"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;__STDC_CONSTANT_MACROS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -69,10 +69,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib opencv_stitching300d.lib opencv_videostab300d.lib opencv_shape300d.lib opencv_objdetect300d.lib opencv_photo300d.lib opencv_calib3d300d.lib opencv_features2d300d.lib opencv_flann300d.lib opencv_highgui300d.lib opencv_videoio300d.lib opencv_imgcodecs300d.lib opencv_ml300d.lib opencv_video300d.lib opencv_imgproc300d.lib opencv_core300d.lib opencv_hal300d.lib avcodec.lib avdevice.lib avfilter.lib avformat.lib avutil.lib postproc.lib swresample.lib swscale.lib sqlite3.lib $(NOINHERIT)"
+				AdditionalDependencies="kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib opencv_stitching300d.lib strmiids.lib opencv_videostab300d.lib opencv_shape300d.lib opencv_objdetect300d.lib opencv_photo300d.lib opencv_calib3d300d.lib opencv_features2d300d.lib opencv_flann300d.lib opencv_highgui300d.lib opencv_videoio300d.lib opencv_imgcodecs300d.lib opencv_ml300d.lib opencv_video300d.lib opencv_imgproc300d.lib opencv_core300d.lib opencv_hal300d.lib avcodec.lib avdevice.lib avfilter.lib avformat.lib avutil.lib postproc.lib swresample.lib swscale.lib sqlite3.lib $(NOINHERIT)"
 				OutputFile="$(OPENCV_DIR)\project\bin\Debug\$(ProjectName).exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(OPENCV_DIR)\project\lib\Debug&quot;;&quot;$(FFMPEG_DIR)\lib&quot;;.\Common"
+				AdditionalLibraryDirectories="&quot;$(OPENCV_DIR)\project\lib\Debug&quot;;&quot;$(FFMPEG_DIR)\lib&quot;;.\Common;.\DirectShow\Lib"
 				IgnoreDefaultLibraryNames="libc.lib"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OPENCV_DIR)\project\bin\Debug\$(TargetName).pdb"
@@ -198,10 +198,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\commonfunc.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -232,6 +228,10 @@
 			<Filter
 				Name="Camera"
 				>
+				<File
+					RelativePath=".\CameraDS.cpp"
+					>
+				</File>
 				<File
 					RelativePath=".\CvvImage.cpp"
 					>
@@ -269,16 +269,24 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Common"
+				>
+				<File
+					RelativePath=".\commonfunc.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\IniFile.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath=".\commonfunc.h"
-				>
-			</File>
 			<File
 				RelativePath=".\Resource.h"
 				>
@@ -323,6 +331,10 @@
 				Name="DB"
 				>
 				<File
+					RelativePath=".\CameraDS.h"
+					>
+				</File>
+				<File
 					RelativePath=".\CManageDB.h"
 					>
 				</File>
@@ -340,6 +352,18 @@
 				</File>
 				<File
 					RelativePath=".\Common\sqlite3.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Common"
+				>
+				<File
+					RelativePath=".\commonfunc.h"
+					>
+				</File>
+				<File
+					RelativePath=".\IniFile.h"
 					>
 				</File>
 			</Filter>

@@ -1,5 +1,4 @@
-#ifndef CVVIMAGE_CLASS_DEF  
-#define CVVIMAGE_CLASS_DEF  
+#pragma once
 
 #ifndef RC_OPENCV_2_1_0  
 
@@ -67,6 +66,6 @@ protected:
 
 //typedef CvvImage CImage;  
 
-#endif  
 
-#endif  
+
+#endif

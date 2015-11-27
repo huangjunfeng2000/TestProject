@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <vector>
+#include <WinCrypt.h>
 
 #pragma warning (disable: 4996)
 
@@ -171,6 +172,44 @@ string getMD5(string source)
     }
     return changeHex(atemp).append(changeHex(btemp)).append(changeHex(ctemp)).append(changeHex(dtemp));
 }
+
+CString getMD5API( CString & csBuffer)
+{
+    CString csDigest;
+    HCRYPTPROV hCryptProv;
+    HCRYPTHASH hHash;
+    BYTE bHash [0x7f];
+    DWORD dwHashLen = 16; // The MD5 algorithm always returns 16 bytes.
+    DWORD cbContent = csBuffer.GetLength ();
+    BYTE * pbContent = ( BYTE *) csBuffer.GetBuffer ( cbContent );
+    if ( CryptAcquireContext (& hCryptProv , NULL , NULL , PROV_RSA_FULL ,CRYPT_VERIFYCONTEXT | CRYPT_MACHINE_KEYSET ))
+    {
+        if ( CryptCreateHash (hCryptProv, CALG_MD5 , 0,0, & hHash ))
+        {
+            if ( CryptHashData ( hHash , pbContent , cbContent , 0))
+            {
+                if (CryptGetHashParam ( hHash , HP_HASHVAL , bHash , & dwHashLen , 0))   // Make a   string version of the numeric digest value csDigest.Empty ();
+                {
+                    CString tmp ;
+                    for ( int i = 0; i <16; i ++)
+                    {
+                        tmp.Format ( "%02x" , bHash [ i ]);
+                        csDigest  += tmp ;
+                    }
+                }
+                else csDigest = _T ( "Error getting hash param" );
+            }
+            else csDigest= _T ( "Error hashing data" );
+        }
+        else csDigest = _T ( "Error creating hash" );
+    }
+    else csDigest = _T ( "Error acquiring context" );
+    CryptDestroyHash ( hHash );
+    CryptReleaseContext ( hCryptProv , 0);
+    csBuffer.ReleaseBuffer ();
+    return  csDigest ;
+}
+
 std::string CryptString(const std::string &str)
 {
     std::string str1 = getMD5(str);
@@ -187,15 +226,31 @@ std::string GetRandString()
 
 std::string ConvertSqliteString(const char *pValue)
 {
-	if (size_t iLen = strlen(pValue))
-	{
-		wstring wstr = Utf82Unicode(std::string (pValue, iLen));
-		string strRes = WideByte2Acsi(wstr);
-		return strRes;
-	}
-	return "";
+    if (size_t iLen = strlen(pValue))
+    {
+        wstring wstr = Utf82Unicode(std::string (pValue, iLen));
+        string strRes = WideByte2Acsi(wstr);
+        return strRes;
+    }
+    return "";
 }
-
+std::string g_strExePath;
+std::string GetExePath()
+{
+	if (!g_strExePath.empty())
+		return g_strExePath;
+	TCHAR   szPath[MAX_PATH];
+	::GetModuleFileName(NULL,szPath,MAX_PATH);
+	CString   strPath   =   szPath; 
+	int   index   =   strPath.ReverseFind(_T( '\\')); 
+	g_strExePath = strPath.Left(index   +   1);
+	return g_strExePath;
+}
+std::string GetConfigFile(const std::string &strFileName)
+{
+	std::string strFile = GetExePath() + "\\" + strFileName;
+	return strFile;
+}
 std::wstring Utf82Unicode(const std::string& utf8string)
 {
     int widesize = ::MultiByteToWideChar(CP_UTF8, 0, utf8string.c_str(), -1, NULL, 0);
@@ -296,4 +351,19 @@ string ASCII2UTF_8(string& strAsciiCode)
     //最后把 unicode 转为 utf8
     strRet = Unicode2Utf8(wstr);
     return strRet;
+}
+
+const std::string strConfigFile = "Config.ini";
+bool SetOpitionValue(const std::string &strSection, const std::string &strAttr, const std::string &strValue)
+{
+	return ::WritePrivateProfileString(strSection.c_str(), strAttr.c_str(), strValue.c_str(), strConfigFile.c_str());
+}
+bool GetOpitionValue(const std::string &strSection, const std::string &strAttr, std::string &strValue)
+{
+	char strTemp[1024];
+	memset(strTemp, 0, 1024);
+	int iCount = ::GetPrivateProfileString(strSection.c_str(), strAttr.c_str(), "", strTemp, 1024, strConfigFile.c_str());
+	if (iCount)
+		strValue = strTemp;
+	return iCount > 0;
 }

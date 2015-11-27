@@ -3,7 +3,6 @@
 
 #pragma once
 
-//#include "ClassImage.h"
 #include <string>
 #include "afxwin.h"
 #include <vector>
@@ -179,5 +178,7 @@ public:
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButtonFfmpeg();
 	afx_msg void OnBnClickedButton3();
+	afx_msg void OnBnClickedButton4();
+	afx_msg void OnBnClickedButton5();
 };
 
