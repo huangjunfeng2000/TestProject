@@ -4,7 +4,8 @@
 #include "stdafx.h"
 #include "TestVC.h"
 #include "TestVCDlg.h"
-
+#include "CManageDB.h"
+#include "CTableDefine.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -75,4 +76,10 @@ BOOL CTestVCApp::InitInstance()
 	// Since the dialog has been closed, return FALSE so that we exit the
 	//  application, rather than start the application's message pump.
 	return FALSE;
+}
+int CTestVCApp::ExitInstance() // default will 'delete this'
+{
+	CManageDB::ReleaseInstance();
+	CProjectDB::releaseInstance();
+	return 0;
 }

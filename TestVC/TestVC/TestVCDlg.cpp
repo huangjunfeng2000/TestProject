@@ -10,6 +10,7 @@
 #include "commonfunc.h"
 #include "CameraDS.h"
 #include "IniFile.h"
+#include "ImageManager.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -51,6 +52,11 @@ CTestVCDlg::CTestVCDlg(CWnd* pParent /*=NULL*/)
 {
     m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
     m_iStartY = 0;
+	m_imgManager = new CImageManager();
+}
+CTestVCDlg::~CTestVCDlg()
+{
+	delete m_imgManager;
 }
 
 void CTestVCDlg::DoDataExchange(CDataExchange* pDX)
@@ -108,7 +114,7 @@ BOOL CTestVCDlg::OnInitDialog()
     pWnd->GetClientRect(&rect);
     pWnd->ClientToScreen(&rect);
     ScreenToClient(&rect);
-    m_imgManager.SetDrawRect(rect);
+    m_imgManager->SetDrawRect(rect);
     //m_image.LoadImage(strFile.c_str(), m_degree, TRUE);
     //HBITMAP hbmp = (HBITMAP)::LoadImage(AfxGetInstanceHandle(), strFile.c_str(), IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
     //if (hbmp)
@@ -116,6 +122,7 @@ BOOL CTestVCDlg::OnInitDialog()
     //	m_bitMap.Attach(hbmp);
     //}
     m_sclBar.SetScrollRange(0, 1000);
+	m_sclBar.EnableWindow(false);
     return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -154,7 +161,7 @@ void CTestVCDlg::OnPaint()
     }
     else
     {
-        m_imgManager.DrawImage(this, m_iStartY / 1000.0);
+        m_imgManager->DrawImage(this, m_iStartY / 1000.0);
         CDialog::OnPaint();
         //DrawImage();
     }
@@ -166,13 +173,25 @@ HCURSOR CTestVCDlg::OnQueryDragIcon()
 {
     return static_cast<HCURSOR>(m_hIcon);
 }
-
+void CTestVCDlg::ReDrawImage()
+{
+	CWnd *pWnd = GetDlgItem(IDC_STATIC_IMAGE);
+	//pWnd->Invalidate();
+	CRect rect;
+	pWnd->GetClientRect(&rect);
+	pWnd->ClientToScreen(&rect);
+    ScreenToClient(&rect);
+	
+	InvalidateRect(&rect);
+	UpdateWindow();
+	m_sclBar.EnableWindow(m_imgManager->ScrollEnable());
+}
 void CTestVCDlg::OnBnClickedButton1()
 {
     // TODO: Add your control notification handler code here
     int 	m_degree=1;
     std::string strFile = "E:\\HJF\\TestVC\\0.bmp";
-    m_imgManager.AddBmpFile(strFile);
+    m_imgManager->AddBmpFile(strFile);
     //m_image.LoadImage(strFile.c_str(), m_degree, TRUE);
     //HBITMAP hbmp = (HBITMAP)::LoadImage(AfxGetInstanceHandle(), strFile.c_str(), IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
     //if (hbmp)
@@ -180,7 +199,8 @@ void CTestVCDlg::OnBnClickedButton1()
     //	m_bitMap.Attach(hbmp);
     //}
     //m_bitMap.LoadBitmap()
-    Invalidate(TRUE);
+	ReDrawImage();
+    //Invalidate(TRUE);
 }
 
 void CTestVCDlg::DrawImage()
@@ -243,7 +263,8 @@ void CTestVCDlg::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
     if (nVscroll != m_iStartY)
     {
         m_iStartY = nVscroll;
-        Invalidate();
+        //Invalidate();
+		ReDrawImage();
     }
     //ScrollWindow(0, -(nVscroll -si.nPos) , NULL ,NULL);
     //m_sclBar.MoveWindow(rt_mvScroll, TRUE);

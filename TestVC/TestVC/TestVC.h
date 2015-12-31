@@ -22,7 +22,7 @@ public:
 // Overrides
 	public:
 	virtual BOOL InitInstance();
-
+	virtual int ExitInstance(); // default will 'delete this'
 // Implementation
 
 	DECLARE_MESSAGE_MAP()

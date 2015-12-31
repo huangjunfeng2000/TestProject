@@ -1,7 +1,12 @@
 #pragma once
 #include <string>
+
+#include "opencv2/core.hpp"
+#include "opencv2/imgproc.hpp"
+#include "opencv2/highgui.hpp"
 //#include <wstring>
 using namespace std;
+using namespace cv;
 
 std::string strFormat (const char *format, ...);
 std::string getMD5(std::string source);
@@ -13,10 +18,8 @@ std::string ConvertSqliteString(const char *pValue);
 std::string GetExePath();
 std::string GetConfigFile(const std::string &strFileName);
 
-
 bool SetOpitionValue(const std::string &strSection, const std::string &strAttr, const std::string &strValue);
 bool GetOpitionValue(const std::string &strSection, const std::string &strAttr, std::string &strValue);
-
 
 std::wstring Utf82Unicode(const std::string& utf8string);	//UTF-8תUnicode
 string WideByte2Acsi(wstring& wstrcode);					//unicode תΪ ascii
@@ -25,3 +28,4 @@ wstring Acsi2WideByte(string& strascii);					//ascii ת Unicode
 std::string Unicode2Utf8(const std::wstring& widestring);	//Unicode ת Utf8
 string ASCII2UTF_8(string& strAsciiCode);					//ascii ת Utf8
 
+void  DrawToHDC(Mat &cvImg, HDC hDC, CRect &rect, int from_x=0, int from_y=0);
